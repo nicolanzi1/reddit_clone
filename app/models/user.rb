@@ -7,6 +7,14 @@ class User < ApplicationRecord
     validates :password_digest, length: { minimum: 6, allow_nil: true }
     validates :session_token, :name, uniqueness: true
 
+    has_many :subs,
+        class_name: :Sub,
+        foreign_key: :moderator_id,
+        primary_key: :id,
+        inverse_of: :moderator
+
+    has_many :posts, inverse_of: :author
+
     def self.find_by_credentials(name, password)
         user = User.find_by(name: name)
         user.try(:is_password?, password) ? user : nil

@@ -1,2 +1,18 @@
-<h1>Posts#show</h1>
-<p>Find me in app/views/posts/show.html.erb</p>
+<div class="border">
+    <div class="small-border">
+        <b>Content:</b>
+
+        <pre><%= @post.content %></pre>
+        <br><br>
+    </div>
+
+    <br>
+    <b>Subs</b>
+    <ul>
+        <% @post.subs.each do |sub| %>
+            <li><a href="<%= sub_url(sub) %>"><%= sub.name %></a></li>
+        <% end %>
+    </ul>
+
+    <a href="<%= edit_post_url(@post) if @post.author == current_user %>">Edit</a>
+</div>

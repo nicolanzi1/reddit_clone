@@ -1,2 +1,12 @@
-<h1>Subs#show</h1>
-<p>Find me in app/views/subs/show.html.erb</p>
+<div class="border">
+    <h1>
+        <%= @sub.name %>
+    </h1>
+
+    <b>Description</b>
+    <p><%= @sub.description %></p>
+
+    <a href="<%= new_post_url %>">Make New Post!</a>
+
+    <a href="<%= edit_sub_url(@sub) if @sub.moderator == current_user %>">Edit</a>
+</div>
