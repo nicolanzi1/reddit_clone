@@ -7,7 +7,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = current_user.post.new(post_params)
+    @post = current_user.posts.new(post_params)
     if @post.save
       redirect_to post_url(@post)
     else
@@ -16,11 +16,11 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find_by(params[:id])
+    @post = Post.find(params[:id])
   end
 
   def edit
-    @post = Post.find_by(params[:id])
+    @post = Post.find(params[:id])
   end
 
   def update
@@ -37,12 +37,12 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(
-      :title, :url, :content, :user_id, :sub_ids: []
+      :title, :url, :content, :user_id, sub_ids: []
     )
   end
 
   def require_user_owns_post!
-    return if current_user.find_by(id: params[:id])
+    return if current_user.posts.find_by(id: params[:id])
     render json: 'Forbidden', status: :forbidden
   end
 end

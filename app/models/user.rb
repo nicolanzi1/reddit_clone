@@ -14,6 +14,7 @@ class User < ApplicationRecord
         inverse_of: :moderator
 
     has_many :posts, inverse_of: :author
+    has_many :comments, inverse_of: :author
 
     def self.find_by_credentials(name, password)
         user = User.find_by(name: name)
@@ -28,7 +29,7 @@ class User < ApplicationRecord
         token
     end
 
-    def is_password?
+    def is_password?(unencrypted_password)
         BCrypt::Password.new(self.password_digest).is_password?(unencrypted_password)
     end
 

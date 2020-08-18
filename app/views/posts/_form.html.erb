@@ -2,6 +2,7 @@
 <% http_method = post.persisted? ? "PATCH" : "POST" %>
 
 <form action="<%= action_url %>" method="post">
+    <input type="hidden" name="_method" value="<%= http_method %>">
     <%= auth_token %>
 
     <label>
@@ -18,7 +19,7 @@
 
     <label>
         Content:
-        <input name="post[content]" value="<%= post.content %>">
+        <textarea name="post[content]"><%= post.content %></textarea>
     </label>
     <br>
 

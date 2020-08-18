@@ -1,4 +1,4 @@
 class PostSub < ApplicationRecord
-    belogns_to :post
-    belogns_to :sub
+    belongs_to :post
+    belongs_to :sub
 end

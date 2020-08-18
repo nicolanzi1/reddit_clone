@@ -21,7 +21,7 @@ class SubsController < ApplicationController
       redirect_to sub_url(@sub)
     else
       flash.now[:errors] = @sub.errors.full_messages
-      render :now
+      render :new
     end
   end
 

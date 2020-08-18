@@ -1,0 +1,6 @@
+<div class="border">
+    <%= @comment.body %> by <%= @comment.author.name %><br>
+
+    <b>Reply to this comment:</b>
+    <%= render "form", comment: @new_comment %>
+</div>
