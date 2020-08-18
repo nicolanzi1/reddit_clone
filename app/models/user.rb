@@ -1,7 +1,7 @@
 class User < ApplicationRecord
     attr_reader :password
 
-    after_initalize :ensure_session_token
+    after_initialize :ensure_session_token
 
     validates :name, :password_digest, :session_token, presence: true
     validates :password_digest, length: { minimum: 6, allow_nil: true }
@@ -14,8 +14,8 @@ class User < ApplicationRecord
 
     def self.generate_session_token
         begin
-            token = SecureRandom::urlsafe64(16)
-        end while User.exits?(session_token: token)
+            token = SecureRandom::urlsafe_base64(16)
+        end while User.exists?(session_token: token)
 
         token
     end
